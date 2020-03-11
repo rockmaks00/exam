@@ -1,0 +1,45 @@
+generate (exponential(1,0,60/4)) 	******генерируем заявку со средним промежутком времени 15 минут******
+queue newq							******генерируем и заполняем очередь******
+seize new 							******генерируем и заполняем блок обслуживания******
+depart newq 						******очищаем очередь******
+advance (exponential(1,0,10)) 		******имитируем время обслуживания в блоке******
+release new 						******выводим заявку из блока обслуживания******
+terminate 0 						******удаляем заявку******
+
+generate 60000						******задаем время имитации модели******
+terminate 1
+start 1
+
+newq storage 4						******вместо очереди создаем очередь с ограничением по размеру******
+enter newq							******помещаем заявку в очередь******
+leave newq							******вынимаем заявку из очереди******
+
+код программы без комментариев:
+для смо без ограничения очереди:
+
+generate (exponential(1,0,60/4))
+queue newq
+seize new
+depart newq
+advance (exponential(1,0,10))
+release new
+terminate 0
+
+generate 60000
+terminate 1
+start 1
+
+для смо с ограниченной очередью:
+
+newq storage 4
+generate (exponential(1,0,60/4))
+enter newq
+seize new
+leave newq
+advance (exponential(1,0,10))
+release new
+terminate 0
+
+generate 60000
+terminate 1
+start 1
