@@ -1,0 +1,11 @@
+generate (poisson(1,1/4))
+queue newq
+seize new
+depart newq
+advance (exponential(1,0,10))
+release new
+terminate 0
+
+generate 1000
+terminate 1
+start 1
